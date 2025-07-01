@@ -25,7 +25,7 @@ Semantic code search and AI analysis for development workflows. Integrates with 
   "bearded-giant/giant-ai.nvim",
   config = function()
     require('giant-ai').setup({
-      provider = "claude",  -- Your AI CLI command
+      provider = "claude",  -- Options: claude, openai, anthropic, gemini, ollama
       limit = 5,           -- Number of search results
       keymaps = {
         search_raw = "<leader>rs",      -- Raw search keymap
@@ -36,6 +36,18 @@ Semantic code search and AI analysis for development workflows. Integrates with 
   end,
 }
 ```
+
+Example configurations for different providers:
+
+```lua
+-- OpenAI (requires OPENAI_API_KEY)
+require('giant-ai').setup({ provider = "openai" })
+
+-- Anthropic API (requires ANTHROPIC_API_KEY)
+require('giant-ai').setup({ provider = "anthropic" })
+
+-- Ollama for local models
+require('giant-ai').setup({ provider = "ollama" })
 
 ### Using packer.nvim
 
@@ -66,7 +78,7 @@ Default configuration:
 
 ```lua
 {
-  provider = "claude",           -- AI CLI command to use
+  provider = "claude",           -- AI provider: claude, openai, anthropic, gemini, ollama
   limit = 5,                    -- Number of search results
   keymaps = {
     search_raw = "<leader>rs",   -- Keymap for raw search
@@ -112,10 +124,34 @@ If [Avante](https://github.com/yetone/avante.nvim) is installed, AI analysis res
 
 ### AI Provider Support
 
-Works with any CLI-based AI tool:
-- `claude` (Claude Code CLI)
-- `openai` (when available)
-- Custom AI CLI commands
+The plugin supports all Giant AI providers:
+
+#### Claude (Default)
+```lua
+provider = "claude"  -- Uses Claude Code CLI (Desktop or Web)
+```
+
+#### OpenAI
+```lua
+provider = "openai"  -- Requires OPENAI_API_KEY
+```
+
+#### Anthropic API
+```lua
+provider = "anthropic"  -- Requires ANTHROPIC_API_KEY
+```
+
+#### Google Gemini
+```lua
+provider = "gemini"  -- Requires GEMINI_API_KEY
+```
+
+#### Ollama (Local Models)
+```lua
+provider = "ollama"  -- For self-hosted models
+```
+
+**Note**: Configure API keys as environment variables or in your Giant AI `agent.yml` configuration.
 
 ## Development
 
